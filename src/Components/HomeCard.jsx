@@ -6,6 +6,7 @@ import CardContent from '@material-ui/core/CardContent';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import { ExitToApp } from '@material-ui/icons';
+import {withRouter} from 'react-router-dom';
 
 const useStyles = makeStyles({
   root: {
@@ -34,6 +35,10 @@ const useStyles = makeStyles({
     margin: "15px",
     padding: "3px",
     color: "white",
+    '&:hover': {
+        backgroundColor: "yellow",
+        color: 'black'
+    }
   },
   buttonGroup:{
     textAlign: "center",
@@ -42,10 +47,15 @@ const useStyles = makeStyles({
   }
 });
 
-export default function Homecard(props) {
+ function Homecard(props) {
   const classes = useStyles();
-  
+  const { history } = props;
+  const [anchorEl, setAnchorEl] = React.useState(null);
   const bull = <span className={classes.bullet}>•</span>;
+  const handleButtonClick = (pageUrl) => {
+    history.push(pageUrl);
+    setAnchorEl(null);
+  };
 
   return (
     <Card className={classes.root}>
@@ -53,7 +63,7 @@ export default function Homecard(props) {
           {console.log(props.user.user.email)}
           <Typography>Logged in as: {props.user.user.email} </Typography>
            
-        <Button className={classes.button}>Add Work Location</Button>
+        <Button className={classes.button}  onClick={()=> handleButtonClick('/addworklocation')}>Add Work Location</Button>
         <Button className={classes.button}>Add Hours and KM to Work Location</Button>
         <Button className={classes.button}>Add Material to Work Location</Button>
         
@@ -64,3 +74,5 @@ export default function Homecard(props) {
     </Card>
   );
 }
+
+export default withRouter(Homecard);

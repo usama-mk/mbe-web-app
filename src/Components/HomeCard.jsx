@@ -64,7 +64,7 @@ const useStyles = makeStyles({
           <Typography>Logged in as: {props.user.user.email} </Typography>
            
         <Button className={classes.button}  onClick={()=> handleButtonClick('/addworklocation')}>Add Work Location</Button>
-        <Button className={classes.button}>Add Hours and KM to Work Location</Button>
+        <Button className={classes.button}  onClick={()=> handleButtonClick('/addhours')}>Add Hours and KM to Work Location</Button>
         <Button className={classes.button}>Add Material to Work Location</Button>
         
       </CardContent>

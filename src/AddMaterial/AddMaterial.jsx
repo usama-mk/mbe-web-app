@@ -36,7 +36,8 @@ const useStyles = makeStyles((theme) => ({
 
 const workplaceItems=["kies locatie", "HK 25", "Zonnestraal school gebouw", "Project 166", "VR-Trade B.V." ];
 const employs=["Kies werknemer", "Maikel", "Lambert", "Rein", "Maarten"]
-export default function AddHours() {
+const categories=["Camera", "Alarm", "Goten", "Hager", "Netwerk"]
+export default function AddMaterial() {
     const classes= useStyles();
     const {register, handleSubmit, errors} = useForm();
 
@@ -45,7 +46,7 @@ export default function AddHours() {
     };
     return (
         <div  className={classes.paper}>
-            <h1>Add Hours and KM to Work Location</h1>
+            <h1>Add Material to Work Location</h1>
            <form autoComplete="off" className="go-right" onSubmit={handleSubmit(onSubmit)} >
            <div>
                <span>Select workplace </span>
@@ -71,32 +72,37 @@ export default function AddHours() {
     
   </div>
   {/*  */}
+  <div>
+               <span>Select Category </span>
+           <select style={{margin:"10px", padding:"5px"}} id="category" name="category" ref={register({required: true})}>
+              {categories.map((category)=>{
+                  
+               return  ( <option value={category} >{category}</option>);
+                  
+              })}
+            </select>
+    
+  </div>
+  {/*  */}
   <span>
       Date: 
   </span>
   <input type="date" id="date" name="date" ref={register({required: true})}/>
+  
   <div>
-           <input style={{marginTop:"10px"}} placeholder="Description"  type="text"  name="description"  ref={register({required: true})}/>
-    <label >Description</label>
+    <input style={{marginTop:"10px"}} placeholder="Amount" name="Amount" type="number" step="0.01" ref={register({required: true})}/>
+    <label>Amount</label>
   </div>
   {/*  */}
   <div>
-    <input style={{marginTop:"10px"}} placeholder="KM Driven" name="KM Driven" type="number" step="0.01" ref={register({required: true})}/>
-    <label>KM Driven</label>
+           <input style={{marginTop:"10px"}} placeholder="Any Additional Remarks"  type="text"  name="Any Additional Remarks"  ref={register({required: true})}/>
+    <label >Any Additional Remarks</label>
   </div>
   {/*  */}
-  <div>
-    <input style={{marginTop:"10px"}} placeholder="Number of Hours" name="Number of Hours" type="number" step="0.1" ref={register({required: true})}/>
-    <label>Number of Hours</label>
-  </div>
-  {/*  */}
-  <div>
-           <input style={{marginTop:"10px"}} placeholder="Parking Cost"  type="number" step="0.01" name="Parking Cost" ref={register({required: true})}/>
-    <label >Parking Cost</label>
-  </div>
+  
   
            {/* {errors.password && <p>{errors.password.message}</p>} */}
-           <input style={{backgroundColor:"#f06d06"}} className={classes.submit} type="submit" value="Add Job Data" />
+           <input style={{backgroundColor:"#f06d06"}} className={classes.submit} type="submit" value="Add material" />
            </form>
         </div>
     )

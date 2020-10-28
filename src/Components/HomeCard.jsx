@@ -65,7 +65,7 @@ const useStyles = makeStyles({
            
         <Button className={classes.button}  onClick={()=> handleButtonClick('/addworklocation')}>Add Work Location</Button>
         <Button className={classes.button}  onClick={()=> handleButtonClick('/addhours')}>Add Hours and KM to Work Location</Button>
-        <Button className={classes.button}>Add Material to Work Location</Button>
+        <Button className={classes.button}  onClick={()=> handleButtonClick('/addmaterial')}>Add Material to Work Location</Button>
         
       </CardContent>
       <CardActions>

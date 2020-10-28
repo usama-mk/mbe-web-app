@@ -8,6 +8,7 @@ import Header from './Components/Header';
 import Home from './Home/Home';
 import AddWorkLocation from './AddWorkLocation/AddWorkLocation';
 import AddHours from './AddHours/AddHours';
+import AddMaterial from './AddMaterial/AddMaterial';
 
 function App() {
   const [user, setUser] = useState("");
@@ -80,6 +81,7 @@ function App() {
       <Route exact path='/' render={()=>(<Home user={user} handleLogout={handleLogout} />)}  />
       <Route exact path='/addworklocation' render={()=>(<AddWorkLocation />)} />
       <Route exact path='/addhours' render={()=>(<AddHours />)} />
+      <Route exact path='/addmaterial' render={()=>(<AddMaterial />)} />
       {/* <Route exact path='/allmaterials' render={()=>(<AllMaterials data={this.state.imageUrls} />)}  />
       <Route exact path='/mymaterials' render={()=>(< MyMaterials data={this.state.videoUrls} />)}  />
       <Route exact path='/myhours' render={()=>(<MyHours data={this.state.pdfUrls} />)} /> */}

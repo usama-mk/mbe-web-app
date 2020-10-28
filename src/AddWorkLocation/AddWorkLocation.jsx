@@ -44,8 +44,10 @@ export default function AddWorkLocation() {
     };
     return (
         <div  className={classes.paper}>
+            <h1>Add Work Location</h1>
            <form autoComplete="off" className="go-right" onSubmit={handleSubmit(onSubmit)} >
            <div>
+               
            <input style={{marginTop:"10px"}} placeholder="Workplace Name"   type="text" name="Workplace Name" ref={register({required: true})}/>
     <label >Workplace Name</label>
   </div>

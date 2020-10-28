@@ -21,10 +21,14 @@ const useStyles = makeStyles((theme) => ({
         marginTop: theme.spacing(1),
     },
     submit: {
+        backgroundColor: "#3f51b5",
+        // color: 'white',
         margin: theme.spacing(3, 0, 2), 
+        
         '&:hover': {
-            backgroundColor: "#f06d06",
-            color: 'black'
+            backgroundColor: "blue",
+            color: 'white',
+            fontWeight: "bold"
         }
     },
 }));
@@ -40,29 +44,34 @@ export default function AddWorkLocation() {
     };
     return (
         <div  className={classes.paper}>
-           <form autoComplete={false} class="go-right" onSubmit={handleSubmit(onSubmit)} >
+           <form autoComplete="off" className="go-right" onSubmit={handleSubmit(onSubmit)} >
            <div>
-           <input placeholder="Workplace Name"   type="text" name="email" ref={register({required: true})}/>
-    <label for="name">Workplace Name</label>
+           <input style={{marginTop:"10px"}} placeholder="Workplace Name"   type="text" name="Workplace Name" ref={register({required: true})}/>
+    <label >Workplace Name</label>
   </div>
   {/*  */}
   <div>
-           <input placeholder="Customer name"  type="text"  name="customer name"  ref={register({required: true})}/>
-    <label for="customer name">Customer name</label>
+           <input style={{marginTop:"10px"}} placeholder="Customer name"  type="text"  name="customer name"  ref={register({required: true})}/>
+    <label >Customer name</label>
   </div>
   {/*  */}
   <div>
-    <input placeholder="Street and House Number" name="name" type="text" ref={register({required: true})}/>
-    <label for="name">Street and House Number</label>
+    <input style={{marginTop:"10px"}} placeholder="Street and House Number" name="Street and House Number" type="text" ref={register({required: true})}/>
+    <label>Street and House Number</label>
   </div>
   {/*  */}
   <div>
-           <input placeholder="Email"  type="text" name="email" ref={register({required: true})}/>
-    <label for="name">Email</label>
+    <input style={{marginTop:"10px"}} placeholder="Zip Code Place" name="Zip Code Place" type="text" ref={register({required: true})}/>
+    <label>Zip Code Place</label>
+  </div>
+  {/*  */}
+  <div>
+           <input style={{marginTop:"10px"}} placeholder="Email"  type="text" name="emailNameProp" ref={register({required: true})}/>
+    <label >Email</label>
   </div>
   
            {/* {errors.password && <p>{errors.password.message}</p>} */}
-           <input className={classes.submit} type="submit" placeholder="Add Job Location" />
+           <input style={{backgroundColor:"#f06d06"}} className={classes.submit} type="submit" value="Add Job Location" />
            </form>
         </div>
     )

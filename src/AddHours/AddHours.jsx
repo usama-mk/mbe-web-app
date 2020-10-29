@@ -3,6 +3,7 @@ import React from 'react';
 import {useForm} from 'react-hook-form';
 import { makeStyles } from '@material-ui/core/styles';
 import '../AddWorkLocation/AddWorkLocation.scss';
+import { firebaseApp } from '../firebase';
 
 
 const useStyles = makeStyles((theme) => ({
@@ -36,12 +37,18 @@ const useStyles = makeStyles((theme) => ({
 
 const workplaceItems=["kies locatie", "HK 25", "Zonnestraal school gebouw", "Project 166", "VR-Trade B.V." ];
 const employs=["Kies werknemer", "Maikel", "Lambert", "Rein", "Maarten"]
-export default function AddHours() {
+export default function AddHours(props) {
     const classes= useStyles();
     const {register, handleSubmit, errors} = useForm();
 
     const onSubmit = data => {
+        data.user_Email= props.user.email;
         console.log(data);
+        firebaseApp.database().ref().child("hoursworked").push(data, err=>{
+            if(err){
+                console.log(err);
+            }
+        })
     };
     return (
         <div  className={classes.paper}>

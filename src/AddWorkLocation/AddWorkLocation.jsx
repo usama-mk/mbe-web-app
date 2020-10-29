@@ -3,6 +3,7 @@ import React from 'react';
 import {useForm} from 'react-hook-form';
 import { makeStyles } from '@material-ui/core/styles';
 import './AddWorkLocation.scss';
+import { firebaseApp } from '../firebase';
 
 
 const useStyles = makeStyles((theme) => ({
@@ -35,12 +36,20 @@ const useStyles = makeStyles((theme) => ({
 
 
 
-export default function AddWorkLocation() {
+export default function AddWorkLocation(props) {
     const classes= useStyles();
     const {register, handleSubmit, errors} = useForm();
 
     const onSubmit = data => {
+        data.user_Email= props.user.email;
+        data.invisible="0";
+        data.remove="0";
+        var newRef = firebaseApp.database().ref().child("worklocations").push();
+        // data.worklocationID= groupId;
+        var key= newRef.key;
+        data.key=key;
         console.log(data);
+        newRef.set(data)
     };
     return (
         <div  className={classes.paper}>
@@ -68,7 +77,7 @@ export default function AddWorkLocation() {
   </div>
   {/*  */}
   <div>
-           <input style={{marginTop:"10px"}} placeholder="Email"  type="text" name="emailNameProp" ref={register({required: true})}/>
+           <input style={{marginTop:"10px"}} placeholder="Email"  type="text" name="email" ref={register({required: true})}/>
     <label >Email</label>
   </div>
   

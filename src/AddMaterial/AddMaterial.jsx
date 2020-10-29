@@ -3,6 +3,7 @@ import React from 'react';
 import {useForm} from 'react-hook-form';
 import { makeStyles } from '@material-ui/core/styles';
 import '../AddWorkLocation/AddWorkLocation.scss';
+import { firebaseApp } from '../firebase';
 
 
 const useStyles = makeStyles((theme) => ({
@@ -37,12 +38,21 @@ const useStyles = makeStyles((theme) => ({
 const workplaceItems=["kies locatie", "HK 25", "Zonnestraal school gebouw", "Project 166", "VR-Trade B.V." ];
 const employs=["Kies werknemer", "Maikel", "Lambert", "Rein", "Maarten"]
 const categories=["Camera", "Alarm", "Goten", "Hager", "Netwerk"]
-export default function AddMaterial() {
+export default function AddMaterial(props) {
     const classes= useStyles();
     const {register, handleSubmit, errors} = useForm();
 
     const onSubmit = data => {
+        data.user_Email= props.user.email;
+        data.invisible="0";
+        data.remove="0";
+        var newRef = firebaseApp.database().ref().child("workmaterials").push();
+        // data.worklocationID= groupId;
+        var key= newRef.key;
+        data.worklocationID=key;
         console.log(data);
+        newRef.set(data)
+        // firebaseApp.database().ref().child("workmaterials").push(data);
     };
     return (
         <div  className={classes.paper}>

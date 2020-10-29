@@ -81,9 +81,9 @@ function App() {
      <Header/>
      <Switch>
       <Route exact path='/' render={()=>(<Home user={user} handleLogout={handleLogout} />)}  />
-      <Route exact path='/addworklocation' render={()=>(<AddWorkLocation />)} />
-      <Route exact path='/addhours' render={()=>(<AddHours />)} />
-      <Route exact path='/addmaterial' render={()=>(<AddMaterial />)} />
+      <Route exact path='/addworklocation' render={()=>(<AddWorkLocation user={user} />)} />
+      <Route exact path='/addhours'  render={()=>(<AddHours user={user} />)} />
+      <Route exact path='/addmaterial' render={()=>(<AddMaterial user={user} />)} />
       <Route exact path='/allmaterials' render={()=>(<AllMaterials />)} />
       <Route exact path='/mymaterials' render={()=>(<MyMaterials />)} />
       {/* <Route exact path='/allmaterials' render={()=>(<AllMaterials data={this.state.imageUrls} />)}  />

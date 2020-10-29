@@ -81,17 +81,17 @@ export default function AddHours() {
   </div>
   {/*  */}
   <div>
-    <input style={{marginTop:"10px"}} placeholder="KM Driven" name="KM Driven" type="number" step="0.01" ref={register({required: true})}/>
+    <input style={{marginTop:"10px"}} placeholder="KM Driven" name="kmDriven" type="number" step="0.01" ref={register({required: true})}/>
     <label>KM Driven</label>
   </div>
   {/*  */}
   <div>
-    <input style={{marginTop:"10px"}} placeholder="Number of Hours" name="Number of Hours" type="number" step="0.1" ref={register({required: true})}/>
+    <input style={{marginTop:"10px"}} placeholder="Number of Hours" name="numberOfHours" type="number" step="0.1" ref={register({required: true})}/>
     <label>Number of Hours</label>
   </div>
   {/*  */}
   <div>
-           <input style={{marginTop:"10px"}} placeholder="Parking Cost"  type="number" step="0.01" name="Parking Cost" ref={register({required: true})}/>
+           <input style={{marginTop:"10px"}} placeholder="Parking Cost"  type="number" step="0.01" name="parkingCost" ref={register({required: true})}/>
     <label >Parking Cost</label>
   </div>
   

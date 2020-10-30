@@ -85,7 +85,7 @@ function App() {
       <Route exact path='/addhours'  render={()=>(<AddHours user={user} />)} />
       <Route exact path='/addmaterial' render={()=>(<AddMaterial user={user} />)} />
       <Route exact path='/allmaterials' render={()=>(<AllMaterials />)} />
-      <Route exact path='/mymaterials' render={()=>(<MyMaterials />)} />
+      <Route exact path='/mymaterials' render={()=>(<MyMaterials user={user} />)} />
       {/* <Route exact path='/allmaterials' render={()=>(<AllMaterials data={this.state.imageUrls} />)}  />
       <Route exact path='/mymaterials' render={()=>(< MyMaterials data={this.state.videoUrls} />)}  />
       <Route exact path='/myhours' render={()=>(<MyHours data={this.state.pdfUrls} />)} /> */}

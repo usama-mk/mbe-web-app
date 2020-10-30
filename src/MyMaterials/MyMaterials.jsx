@@ -1,9 +1,10 @@
 import React, { Component } from 'react'
 import AllMaterialsCard from '../Components/AllMaterialsCard';
+import { firebaseApp } from '../firebase';
 
 export default class MyMaterials extends Component {
-    constructor(){
-        super();
+    constructor(props){
+        super(props);
         this.state={
             workplaceItems: ["Select optionkies locatie", "HK 25", "Zonnestraal school gebouw", "Project 166", "VR-Trade B.V." ],
             workLocationName:"Isori",
@@ -15,8 +16,20 @@ export default class MyMaterials extends Component {
             remarks:"Great Product",
             selectedWorkplace:"",
             id:"",
-            myItem:true
+            myItem: true,
+            objectValuesArray:[],
         }
+    }
+
+    componentDidMount(){
+        firebaseApp.database().ref().child("workmaterials").on("value", snapshot=>{
+            if(snapshot.val()!=null){
+                this.setState({...this.state, objectValuesArray: Object.values(snapshot.val()) }, ()=>{
+                    console.log(this.state.objectValuesArray);
+                })
+            }
+        })
+        
     }
     render() {
         return (
@@ -25,7 +38,11 @@ export default class MyMaterials extends Component {
                 <div style={styles} >
                 <h1>My Materials</h1>
                  
-             <AllMaterialsCard  state= {this.state}  />   
+                {this.state.objectValuesArray? <div>{this.state.objectValuesArray.map((currentSelectedObject)=>{
+              if(this.props.user.email===currentSelectedObject.user_Email){
+                  return  <AllMaterialsCard state={currentSelectedObject} check={this.state.myItem} />
+              }
+            })}</div>  : <div>Fetching Data..</div> } 
             </div>
             </div>
         )

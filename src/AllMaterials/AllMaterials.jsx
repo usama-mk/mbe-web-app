@@ -16,7 +16,7 @@ export default class AllMaterials extends Component {
             remarks:"Great Product",
             selectedWorkplace:"",
             id:"",
-            myItem:"",
+            myItem:false,
             objectValuesArray:[],
 
         }
@@ -54,7 +54,7 @@ export default class AllMaterials extends Component {
   </div>
             {this.state.objectValuesArray? <div>{this.state.objectValuesArray.map((currentSelectedObject)=>{
               if(currentSelectedObject.workplace===this.state.selectedWorkplace){
-                  return  <AllMaterialsCard state={currentSelectedObject} />
+                  return  <AllMaterialsCard state={currentSelectedObject} check={this.state.myItem} />
               }
             })}</div>  : <div>Fetching Data..</div> } 
             </div>

@@ -1,5 +1,5 @@
 import { Input, TextField } from '@material-ui/core';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import {useForm} from 'react-hook-form';
 import { makeStyles } from '@material-ui/core/styles';
 import '../AddWorkLocation/AddWorkLocation.scss';
@@ -36,13 +36,41 @@ const useStyles = makeStyles((theme) => ({
 
 
 const workplaceItems=["kies locatie", "HK 25", "Zonnestraal school gebouw", "Project 166", "VR-Trade B.V." ];
-const employs=["Kies werknemer", "Maikel", "Lambert", "Rein", "Maarten"]
-const categories=["Camera", "Alarm", "Goten", "Hager", "Netwerk"]
+// const categories=["Camera", "Alarm", "Goten", "Hager", "Netwerk"]
+const materials=["Kies werknemer", "Maikel", "Lambert", "Rein", "Maarten"]
+
+
+
 export default function AddMaterial(props) {
     const classes= useStyles();
     const {register, handleSubmit, errors} = useForm();
+    const[categories,setCategories]= useState({});
+    const[materials,setMaterials]= useState({});
+    var values={};
+
+useEffect(()=>{
+    firebaseApp.database().ref().child("Categories").on("value", snapshot=>{
+        if(snapshot.val()!=null){
+            console.log(snapshot.val())
+            setCategories({ ... snapshot.val() })
+            
+
+        }
+    })
+},[])
+
+ const setMat=( )=>{
+    //   setMaterials({...categories[id]});
+    console.log("hiiiiiiii")
+    
+    console.log(document.getElementById("category").value)
+      values={...categories[document.getElementById("category").value]};
+      setMaterials({...values})
+      console.log(materials)
+ }
 
     const onSubmit = data => {
+
         data.user_Email= props.user.email;
         data.invisible="0";
         data.remove="0";
@@ -71,11 +99,12 @@ export default function AddMaterial(props) {
   </div>
   {/*  */}
   <div>
-               <span>Select Employee </span>
-           <select style={{margin:"10px", padding:"5px"}} id="employee" name="employee" ref={register({required: true})}>
-              {employs.map((employee)=>{
-                  
-               return  ( <option value={employee} >{employee}</option>);
+               <span>Select Category </span>
+           <select onChange={setMat} style={{margin:"10px", padding:"5px"}} id="category" name="category" ref={register({required: true})}>
+              {Object.keys(categories).map((category)=>{
+                    // setMaterials({...categories[category]})
+                // values={...categories[category]};
+               return  ( <option  value={category} >{category}</option>);
                   
               })}
             </select>
@@ -83,11 +112,11 @@ export default function AddMaterial(props) {
   </div>
   {/*  */}
   <div>
-               <span>Select Category </span>
-           <select style={{margin:"10px", padding:"5px"}} id="category" name="category" ref={register({required: true})}>
-              {categories.map((category)=>{
+               <span>Select Material </span>
+           <select style={{margin:"10px", padding:"5px"}} id="material" name="material" ref={register({required: true})}>
+              {Object.values(materials).map((material)=>{
                   
-               return  ( <option value={category} >{category}</option>);
+               return  ( <option value={material} >{material}</option>);
                   
               })}
             </select>
@@ -105,7 +134,7 @@ export default function AddMaterial(props) {
   </div>
   {/*  */}
   <div>
-           <input style={{marginTop:"10px"}} placeholder="remarks"  type="text"  name="Any Additional Remarks"  ref={register({required: true})}/>
+           <input style={{marginTop:"10px"}} placeholder="remarks"  type="text"  name="remarks"  ref={register({required: true})}/>
     <label >Any Additional Remarks</label>
   </div>
   {/*  */}

@@ -11,6 +11,7 @@ import AddHours from './AddHours/AddHours';
 import AddMaterial from './AddMaterial/AddMaterial';
 import AllMaterials from './AllMaterials/AllMaterials';
 import MyMaterials from './MyMaterials/MyMaterials';
+import MyHours from './MyHours/MyHours';
 
 function App() {
   const [user, setUser] = useState("");
@@ -86,6 +87,7 @@ function App() {
       <Route exact path='/addmaterial' render={()=>(<AddMaterial user={user} />)} />
       <Route exact path='/allmaterials' render={()=>(<AllMaterials />)} />
       <Route exact path='/mymaterials' render={()=>(<MyMaterials user={user} />)} />
+      <Route exact path='/myhours' render={()=>(<MyHours user={user} />)} />
       {/* <Route exact path='/allmaterials' render={()=>(<AllMaterials data={this.state.imageUrls} />)}  />
       <Route exact path='/mymaterials' render={()=>(< MyMaterials data={this.state.videoUrls} />)}  />
       <Route exact path='/myhours' render={()=>(<MyHours data={this.state.pdfUrls} />)} /> */}

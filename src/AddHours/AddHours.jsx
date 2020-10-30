@@ -43,12 +43,14 @@ export default function AddHours(props) {
 
     const onSubmit = data => {
         data.user_Email= props.user.email;
+        data.invisible="0";
+        data.remove="0";
+        var newRef = firebaseApp.database().ref().child("hoursworked").push();
+        // data.worklocationID= groupId;
+        var key= newRef.key;
+        data.worklocationID=key;
         console.log(data);
-        firebaseApp.database().ref().child("hoursworked").push(data, err=>{
-            if(err){
-                console.log(err);
-            }
-        })
+        newRef.set(data)
     };
     return (
         <div  className={classes.paper}>

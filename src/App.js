@@ -20,6 +20,9 @@ function App() {
   const [Emailerror, setEmailError] = useState("");
   const [passwordError, setPasswordError] = useState("");
   const [hasAccount, setHasAccount] = useState(false);
+  const [appWorkplaceItems, setAppWorkplaceItems] = useState([]);
+
+  
 
   const handleLogin = ()=>{
       clearErrors();
@@ -58,6 +61,7 @@ function App() {
   }
   useEffect(()=>{
       authListener();
+      getLoc();
   },[]);
 
   const clearInputs = ()=>{
@@ -68,6 +72,22 @@ function App() {
   const clearErrors = ()=>{
     setEmailError('');
     setPasswordError('');
+}
+const getLoc=()=>{
+    const wp=[]
+    firebaseApp.database().ref().child("worklocations").on("value", snapshot=>{
+        
+        if(snapshot.val()!=null){
+            Object.values(snapshot.val()).map((obj)=>{
+               console.log (obj.name_workLocation)
+               wp.push(obj.name_workLocation);
+            });
+           
+
+        }
+       
+    })
+    setAppWorkplaceItems({...wp});
 }
 
 
@@ -85,7 +105,7 @@ function App() {
       <Route exact path='/addworklocation' render={()=>(<AddWorkLocation user={user} />)} />
       <Route exact path='/addhours'  render={()=>(<AddHours user={user} />)} />
       <Route exact path='/addmaterial' render={()=>(<AddMaterial user={user} />)} />
-      <Route exact path='/allmaterials' render={()=>(<AllMaterials />)} />
+      <Route exact path='/allmaterials' render={()=>(<AllMaterials appWorkplaceItems={appWorkplaceItems}  />)} />
       <Route exact path='/mymaterials' render={()=>(<MyMaterials user={user} />)} />
       <Route exact path='/myhours' render={()=>(<MyHours user={user} />)} />
       {/* <Route exact path='/allmaterials' render={()=>(<AllMaterials data={this.state.imageUrls} />)}  />

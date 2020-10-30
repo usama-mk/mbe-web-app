@@ -3,39 +3,73 @@ import AllMaterialsCard from '../Components/AllMaterialsCard'
 import { firebaseApp } from '../firebase';
 
 export default class AllMaterials extends Component {
-    constructor(){
-        super();
+    constructor(props){
+        super(props);
         this.state={
-            workplaceItems: ["Select optionkies locatie", "HK 25", "Zonnestraal school gebouw", "Project 166", "VR-Trade B.V." ],
-            workLocationName:"Isori",
-            userEmail:"mk@gmail.com",
-            date:"28/10/2020",
-            category:"IT",
-            materials:"Camera",
-            amount:"750",
-            remarks:"Great Product",
+            workplaceItems:[],
             selectedWorkplace:"",
             id:"",
             myItem:false,
             objectValuesArray:[],
 
         }
+        console.log(Object.values({...props.appWorkplaceItems}));
+         
+        
     }
     selectedWorkplace=(e)=>{
          
         console.log(e.target.value)
         this.setState({...this.state, selectedWorkplace: e.target.value});
     }
+    getLoc=()=>{
+        
+        firebaseApp.database().ref().child("worklocations").on("value", snapshot=>{
+            const wp=[]
+            if(snapshot.val()!=null){
+                Object.values(snapshot.val()).map((obj)=>{
+                   console.log (obj.name_workLocation)
+                   wp.push(obj.name_workLocation);
+                });
+               
+    
+            }
+            this.setState({...this.state, workplaceItems: wp});
+        })
+       
+    }
 
-    componentDidMount(){
+    getAllRelatedMaterials =()=>{
         firebaseApp.database().ref().child("workmaterials").on("value", snapshot=>{
             if(snapshot.val()!=null){
                 this.setState({...this.state, objectValuesArray: Object.values(snapshot.val()) }, ()=>{
                     console.log(this.state.objectValuesArray);
+                    console.log(this.state.workplaceItems)
+                    firebaseApp.database().ref().child("worklocations").on("value", snapshot=>{
+                        const wp=[]
+                        if(snapshot.val()!=null){
+                            Object.values(snapshot.val()).map((obj)=>{
+                               console.log (obj.name_workLocation)
+                               wp.push(obj.name_workLocation);
+                            });
+                           
+                
+                        }
+                        this.setState({...this.state, workplaceItems: wp});
+                    })
+
                 })
             }
         })
+    }
+
+    componentDidMount(){
         
+
+       this.getAllRelatedMaterials();
+        
+    //    this.setState(...this.state, workplaceItems: Object.values(ap))
+       
     }
 
     render() {
@@ -46,14 +80,14 @@ export default class AllMaterials extends Component {
                  <div>
                <span>Select workplace </span>
            <select style={{margin:"10px", padding:"5px"}} id="workplace" name="workplace" onChange={this.selectedWorkplace} value={this.state.selectedWorkplace} >
-              {this.state.workplaceItems.map((workplaceItem)=>{   
+              {this.state.workplaceItems && this.state.workplaceItems.map((workplaceItem)=>{   
                return  ( <option value={workplaceItem} >{workplaceItem}</option>); 
               })}
             </select>
     
   </div>
             {this.state.objectValuesArray? <div>{this.state.objectValuesArray.map((currentSelectedObject)=>{
-              if(currentSelectedObject.workplace===this.state.selectedWorkplace){
+              if(currentSelectedObject.workLocationName===this.state.selectedWorkplace){
                   return  <AllMaterialsCard state={currentSelectedObject} check={this.state.myItem} />
               }
             })}</div>  : <div>Fetching Data..</div> } 

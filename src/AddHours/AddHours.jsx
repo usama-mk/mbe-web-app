@@ -35,7 +35,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 
-const wp=["kies locatie", "HK 25", "Zonnestraal school gebouw", "Project 166", "VR-Trade B.V." ];
+// const wp=["kies locatie", "HK 25", "Zonnestraal school gebouw", "Project 166", "VR-Trade B.V." ];
 export default function AddHours(props) {
     const classes= useStyles();
     const {register, handleSubmit, errors} = useForm();
@@ -53,12 +53,13 @@ useEffect(()=>{
         }
     })
     firebaseApp.database().ref().child("worklocations").on("value", snapshot=>{
+        const wp=[]
         if(snapshot.val()!=null){
             console.log(Object.values(snapshot.val()).map((obj)=>{
                console.log (obj.name_workLocation)
-               workplaceItems.push(obj.name_workLocation);
+               wp.push(obj.name_workLocation);
             }));
-         
+         setWorkplaceItems(wp);
             
 
         }
@@ -85,7 +86,7 @@ useEffect(()=>{
            <form autoComplete="off" className="go-right" onSubmit={handleSubmit(onSubmit)} >
            <div>
                <span>Select workplace </span>
-           <select style={{margin:"10px", padding:"5px"}} id="workplace" name="workplace" ref={register({required: true})}>
+           <select style={{margin:"10px", padding:"5px"}} id="workplace" name="workLocationName" ref={register({required: true})}>
               {workplaceItems.map((workplaceItem)=>{
                   
                return  ( <option value={workplaceItem} >{workplaceItem}</option>);
@@ -97,7 +98,7 @@ useEffect(()=>{
   {/*  */}
   <div>
                <span>Select Employee </span>
-           <select style={{margin:"10px", padding:"5px"}} id="employee" name="employee" ref={register({required: true})}>
+           <select style={{margin:"10px", padding:"5px"}} id="employee" name="employ" ref={register({required: true})}>
               {Object.values(employs).map((employee)=>{
                   
                return  ( <option value={employee} >{employee}</option>);
@@ -117,12 +118,12 @@ useEffect(()=>{
   </div>
   {/*  */}
   <div>
-    <input style={{marginTop:"10px"}} placeholder="KM Driven" name="kmDriven" type="number" step="0.01" ref={register({required: true})}/>
+    <input style={{marginTop:"10px"}} placeholder="KM Driven" name="kmdriven" type="number" step="0.01" ref={register({required: true})}/>
     <label>KM Driven</label>
   </div>
   {/*  */}
   <div>
-    <input style={{marginTop:"10px"}} placeholder="Number of Hours" name="numberOfHours" type="number" step="0.1" ref={register({required: true})}/>
+    <input style={{marginTop:"10px"}} placeholder="Number of Hours" name="hoursworked" type="number" step="0.1" ref={register({required: true})}/>
     <label>Number of Hours</label>
   </div>
   {/*  */}

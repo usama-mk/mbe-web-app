@@ -62,17 +62,17 @@ export default function AddWorkLocation(props) {
   </div>
   {/*  */}
   <div>
-           <input style={{marginTop:"10px"}} placeholder="Customer name"  type="text"  name="customer name"  ref={register({required: true})}/>
+           <input style={{marginTop:"10px"}} placeholder="Customer name"  type="text"  name="name_customer"  ref={register({required: true})}/>
     <label >Customer name</label>
   </div>
   {/*  */}
   <div>
-    <input style={{marginTop:"10px"}} placeholder="Street and House Number" name="Street and House Number" type="text" ref={register({required: true})}/>
+    <input style={{marginTop:"10px"}} placeholder="Street and House Number" name="street" type="text" ref={register({required: true})}/>
     <label>Street and House Number</label>
   </div>
   {/*  */}
   <div>
-    <input style={{marginTop:"10px"}} placeholder="Zip Code Place" name="Zip Code Place" type="text" ref={register({required: true})}/>
+    <input style={{marginTop:"10px"}} placeholder="Zip Code Place" name="postal_code" type="text" ref={register({required: true})}/>
     <label>Zip Code Place</label>
   </div>
   {/*  */}

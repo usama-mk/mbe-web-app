@@ -35,9 +35,6 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 
-const workplaceItems=["kies locatie", "HK 25", "Zonnestraal school gebouw", "Project 166", "VR-Trade B.V." ];
-// const categories=["Camera", "Alarm", "Goten", "Hager", "Netwerk"]
-const materials=["Kies werknemer", "Maikel", "Lambert", "Rein", "Maarten"]
 
 
 
@@ -46,6 +43,8 @@ export default function AddMaterial(props) {
     const {register, handleSubmit, errors} = useForm();
     const[categories,setCategories]= useState({});
     const[materials,setMaterials]= useState({});
+    const[workplaceItems,setWorkplaceItems]= useState([]);
+    const[employs,setEmploys]= useState({});
     var values={};
 
 useEffect(()=>{
@@ -57,6 +56,28 @@ useEffect(()=>{
 
         }
     })
+    firebaseApp.database().ref().child("employs").on("value", snapshot=>{
+        if(snapshot.val()!=null){
+            
+            setEmploys({ ... snapshot.val() })
+            
+
+        }
+    })
+
+    firebaseApp.database().ref().child("worklocations").on("value", snapshot=>{
+        const wp=[]
+        if(snapshot.val()!=null){
+            console.log(Object.values(snapshot.val()).map((obj)=>{
+               console.log (obj.name_workLocation)
+               wp.push(obj.name_workLocation);
+            }));
+         setWorkplaceItems(wp)
+            
+
+        }
+    })
+
 },[])
 
  const setMat=( )=>{
@@ -88,8 +109,8 @@ useEffect(()=>{
            <form autoComplete="off" className="go-right" onSubmit={handleSubmit(onSubmit)} >
            <div>
                <span>Select workplace </span>
-           <select style={{margin:"10px", padding:"5px"}} id="workplace" name="workplace" ref={register({required: true})}>
-              {workplaceItems.map((workplaceItem)=>{
+           <select style={{margin:"10px", padding:"5px"}} id="workplace" name="workLocationName" ref={register({required: true})}>
+              {workplaceItems&&workplaceItems.map((workplaceItem)=>{
                   
                return  ( <option value={workplaceItem} >{workplaceItem}</option>);
                   
@@ -113,7 +134,7 @@ useEffect(()=>{
   {/*  */}
   <div>
                <span>Select Material </span>
-           <select style={{margin:"10px", padding:"5px"}} id="material" name="material" ref={register({required: true})}>
+           <select style={{margin:"10px", padding:"5px"}} id="material" name="materials" ref={register({required: true})}>
               {Object.values(materials).map((material)=>{
                   
                return  ( <option value={material} >{material}</option>);
@@ -131,6 +152,18 @@ useEffect(()=>{
   <div>
     <input style={{marginTop:"10px"}} placeholder="Amount" name="Amount" type="number" step="0.01" ref={register({required: true})}/>
     <label>Amount</label>
+  </div>
+  {/*  */}
+  <div>
+               <span>Select Employee </span>
+           <select style={{margin:"10px", padding:"5px"}} id="employee" name="employ" ref={register({required: true})}>
+              {Object.values(employs).map((employee)=>{
+                  
+               return  ( <option value={employee} >{employee}</option>);
+                  
+              })}
+            </select>
+    
   </div>
   {/*  */}
   <div>

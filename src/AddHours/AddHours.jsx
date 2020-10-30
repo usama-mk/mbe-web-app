@@ -1,5 +1,5 @@
 import { Input, TextField } from '@material-ui/core';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import {useForm} from 'react-hook-form';
 import { makeStyles } from '@material-ui/core/styles';
 import '../AddWorkLocation/AddWorkLocation.scss';
@@ -40,6 +40,21 @@ const employs=["Kies werknemer", "Maikel", "Lambert", "Rein", "Maarten"]
 export default function AddHours(props) {
     const classes= useStyles();
     const {register, handleSubmit, errors} = useForm();
+    const[employs,setEmploys]= useState({});
+    var values={};
+
+useEffect(()=>{
+    firebaseApp.database().ref().child("employs").on("value", snapshot=>{
+        if(snapshot.val()!=null){
+            console.log(snapshot.val())
+            setEmploys({ ... snapshot.val() })
+            
+
+        }
+    })
+},[])
+
+
 
     const onSubmit = data => {
         data.user_Email= props.user.email;
@@ -71,7 +86,7 @@ export default function AddHours(props) {
   <div>
                <span>Select Employee </span>
            <select style={{margin:"10px", padding:"5px"}} id="employee" name="employee" ref={register({required: true})}>
-              {employs.map((employee)=>{
+              {Object.values(employs).map((employee)=>{
                   
                return  ( <option value={employee} >{employee}</option>);
                   

@@ -17,7 +17,7 @@ export default function AllMaterialsCard(props) {
                 <h2><span style={{color:"#3f51b5"}}>  userEmail: </span> {props.state.user_Email} </h2>
                 <h2><span style={{color:"#3f51b5"}}>  date: </span>{props.state.date} </h2>
                 <h2><span style={{color:"#3f51b5"}}>  category: </span> {props.state.category} </h2>
-                <h2><span style={{color:"#3f51b5"}}>  materials: </span>{props.state.materials} </h2>
+                <h2><span style={{color:"#3f51b5"}}>  material: </span>{props.state.material} </h2>
                 <h2><span style={{color:"#3f51b5"}}>  amount: </span> {props.state.Amount} </h2>
                 <h2><span style={{color:"#3f51b5"}}>  remarks: </span> {props.state.remarks} </h2>
                 <h2><span style={{color:"#3f51b5"}}>  Selected workplace from dropdown </span> {props.state.workplace} </h2>

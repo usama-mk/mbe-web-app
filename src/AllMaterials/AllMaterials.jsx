@@ -3,8 +3,8 @@ import AllMaterialsCard from '../Components/AllMaterialsCard'
 import { firebaseApp } from '../firebase';
 
 export default class AllMaterials extends Component {
-    constructor(props){
-        super(props);
+    constructor(){
+        super();
         this.state={
             workplaceItems:[],
             selectedWorkplace:"",
@@ -13,31 +13,15 @@ export default class AllMaterials extends Component {
             objectValuesArray:[],
 
         }
-        console.log(Object.values({...props.appWorkplaceItems}));
-         
-        
+   
     }
+    
     selectedWorkplace=(e)=>{
          
         console.log(e.target.value)
         this.setState({...this.state, selectedWorkplace: e.target.value});
     }
-    getLoc=()=>{
-        
-        firebaseApp.database().ref().child("worklocations").on("value", snapshot=>{
-            const wp=[]
-            if(snapshot.val()!=null){
-                Object.values(snapshot.val()).map((obj)=>{
-                   console.log (obj.name_workLocation)
-                   wp.push(obj.name_workLocation);
-                });
-               
     
-            }
-            this.setState({...this.state, workplaceItems: wp});
-        })
-       
-    }
 
     getAllRelatedMaterials =()=>{
         firebaseApp.database().ref().child("workmaterials").on("value", snapshot=>{
@@ -64,12 +48,9 @@ export default class AllMaterials extends Component {
     }
 
     componentDidMount(){
-        
 
-       this.getAllRelatedMaterials();
-        
-    //    this.setState(...this.state, workplaceItems: Object.values(ap))
-       
+    this.getAllRelatedMaterials();
+
     }
 
     render() {

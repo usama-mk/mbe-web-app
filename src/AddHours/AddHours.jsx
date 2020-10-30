@@ -35,23 +35,35 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 
-const workplaceItems=["kies locatie", "HK 25", "Zonnestraal school gebouw", "Project 166", "VR-Trade B.V." ];
-const employs=["Kies werknemer", "Maikel", "Lambert", "Rein", "Maarten"]
+const wp=["kies locatie", "HK 25", "Zonnestraal school gebouw", "Project 166", "VR-Trade B.V." ];
 export default function AddHours(props) {
     const classes= useStyles();
     const {register, handleSubmit, errors} = useForm();
     const[employs,setEmploys]= useState({});
+    const[workplaceItems,setWorkplaceItems]= useState([]);
     var values={};
 
 useEffect(()=>{
     firebaseApp.database().ref().child("employs").on("value", snapshot=>{
         if(snapshot.val()!=null){
-            console.log(snapshot.val())
+            
             setEmploys({ ... snapshot.val() })
             
 
         }
     })
+    firebaseApp.database().ref().child("worklocations").on("value", snapshot=>{
+        if(snapshot.val()!=null){
+            console.log(Object.values(snapshot.val()).map((obj)=>{
+               console.log (obj.name_workLocation)
+               workplaceItems.push(obj.name_workLocation);
+            }));
+         
+            
+
+        }
+    })
+
 },[])
 
 

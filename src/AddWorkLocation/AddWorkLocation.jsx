@@ -57,7 +57,7 @@ export default function AddWorkLocation(props) {
            <form autoComplete="off" className="go-right" onSubmit={handleSubmit(onSubmit)} >
            <div>
                
-           <input style={{marginTop:"10px"}} placeholder="Workplace Name"   type="text" name="Workplace Name" ref={register({required: true})}/>
+           <input style={{marginTop:"10px"}} placeholder="Workplace Name"   type="text" name="name_workLocation" ref={register({required: true})}/>
     <label >Workplace Name</label>
   </div>
   {/*  */}

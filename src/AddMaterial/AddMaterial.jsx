@@ -105,7 +105,7 @@ export default function AddMaterial(props) {
   </div>
   {/*  */}
   <div>
-           <input style={{marginTop:"10px"}} placeholder="Any Additional Remarks"  type="text"  name="Any Additional Remarks"  ref={register({required: true})}/>
+           <input style={{marginTop:"10px"}} placeholder="remarks"  type="text"  name="Any Additional Remarks"  ref={register({required: true})}/>
     <label >Any Additional Remarks</label>
   </div>
   {/*  */}

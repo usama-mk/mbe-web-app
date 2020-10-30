@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import AllMaterialsCard from '../Components/AllMaterialsCard'
+import { firebaseApp } from '../firebase';
 
 export default class AllMaterials extends Component {
     constructor(){
@@ -16,6 +17,7 @@ export default class AllMaterials extends Component {
             selectedWorkplace:"",
             id:"",
             myItem:"",
+            objectValuesArray:[],
 
         }
     }
@@ -24,7 +26,20 @@ export default class AllMaterials extends Component {
         console.log(e.target.value)
         this.setState({...this.state, selectedWorkplace: e.target.value});
     }
+
+    componentDidMount(){
+        firebaseApp.database().ref().child("workmaterials").on("value", snapshot=>{
+            if(snapshot.val()!=null){
+                this.setState({...this.state, objectValuesArray: Object.values(snapshot.val()) }, ()=>{
+                    console.log(this.state.objectValuesArray);
+                })
+            }
+        })
+        
+    }
+
     render() {
+        
         return (
             <div style={styles} >
                 <h1>All Materials</h1>
@@ -37,7 +52,11 @@ export default class AllMaterials extends Component {
             </select>
     
   </div>
-             <AllMaterialsCard  state= {this.state}  />   
+            {this.state.objectValuesArray? <div>{this.state.objectValuesArray.map((currentSelectedObject)=>{
+              if(currentSelectedObject.workplace===this.state.selectedWorkplace){
+                  return  <AllMaterialsCard state={currentSelectedObject} />
+              }
+            })}</div>  : <div>Fetching Data..</div> } 
             </div>
         )
     }

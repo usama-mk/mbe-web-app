@@ -72,7 +72,7 @@ export default function Login(props) {
                 <Avatar className={classes.avatar}>
                     <LockOutlinedIcon />
                 </Avatar>
-                <Typography component="h1" variant="h5">
+                <Typography style={{marginBottom:"15px"}} component="h1" variant="h5">
                     Sign in MBE
         </Typography>
                 <form className={classes.form} >
@@ -82,7 +82,7 @@ export default function Login(props) {
                         required
                         fullWidth
                         id="email"
-                        label="Email Address"
+                        placeholder="Email Address"
                         name="email"
                         autoComplete="email"
                         autoFocus
@@ -96,7 +96,7 @@ export default function Login(props) {
                         required
                         fullWidth
                         name="password"
-                        label="Password"
+                       placeholder="Password"
                         type="password"
                         id="password"
                         autoComplete="current-password"

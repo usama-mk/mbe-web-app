@@ -82,7 +82,7 @@ const Header=(props)=> {
         <IconButton edge="start" className={classes.menuButton} 
               color="inherit" aria-label="menu" 
               onClick={()=> handleButtonClick('/')}
-              > <Home/>
+              > <Home style={{color: "yellow"}} />
               <Typography variant="h6" className={classes.title} >
             MBE Home
           </Typography>
@@ -130,9 +130,9 @@ const Header=(props)=> {
               ): 
               (
                 <div className={classes.headerOptions}>
-               <Button startIcon={<AllInclusive/>} variant="contained" onClick={()=> handleButtonClick('/allmaterials')} >All Materials</Button>
-               <Button startIcon={<BusinessCenter/>} variant="contained" onClick={()=> handleButtonClick('/mymaterials')} >My Materials</Button>
-               <Button startIcon={<HourglassEmpty/>} variant="contained" onClick={()=> handleButtonClick('/myhours')} >My Hours</Button>
+               <Button startIcon={<AllInclusive style={{color: "red"}}/>} variant="contained" onClick={()=> handleButtonClick('/allmaterials')} >All Materials</Button>
+               <Button startIcon={<BusinessCenter style={{color: "purple"}} />} variant="contained" onClick={()=> handleButtonClick('/mymaterials')} >My Materials</Button>
+               <Button startIcon={<HourglassEmpty style={{color: "red"}} />} variant="contained" onClick={()=> handleButtonClick('/myhours')} >My Hours</Button>
               </div>
               )
               

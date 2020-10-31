@@ -1,4 +1,4 @@
-import { Input, TextField } from '@material-ui/core';
+import { IconButton, Input, TextField } from '@material-ui/core';
 import React, { useEffect, useState } from 'react';
 import {useForm} from 'react-hook-form';
 import { makeStyles } from '@material-ui/core/styles';
@@ -133,7 +133,10 @@ useEffect(()=>{
   </div>
   
            {/* {errors.password && <p>{errors.password.message}</p>} */}
+           <IconButton>
            <input style={{backgroundColor:"#f06d06"}} className={classes.submit} type="submit" value="Add Job Data" />
+
+           </IconButton>
            </form>
         </div>
     )

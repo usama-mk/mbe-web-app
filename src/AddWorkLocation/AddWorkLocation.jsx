@@ -1,4 +1,4 @@
-import { Input, TextField } from '@material-ui/core';
+import { IconButton, Input, TextField } from '@material-ui/core';
 import React from 'react';
 import {useForm} from 'react-hook-form';
 import { makeStyles } from '@material-ui/core/styles';
@@ -82,8 +82,10 @@ export default function AddWorkLocation(props) {
   </div>
   
            {/* {errors.password && <p>{errors.password.message}</p>} */}
-           <input style={{backgroundColor:"#f06d06"}} className={classes.submit} type="submit" value="Add Job Location" />
-           </form>
+           <IconButton>
+           <input style={{backgroundColor:"#f06d06"}} className={classes.submit} type="submit" value="Add Job Data" />
+
+           </IconButton>           </form>
         </div>
     )
 }

@@ -94,7 +94,7 @@ function App() {
      </Switch>
    </BrowserRouter>
           </div>
-      ):( <Login 
+      ):(  <Login 
         email={email}
         setEmail={setEmail}
         password={password}

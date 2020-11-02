@@ -3,7 +3,7 @@ import './App.css';
 import { firebaseApp } from './firebase';
 import { useEffect, useState } from 'react';
 import { Button } from '@material-ui/core';
-import { BrowserRouter, Route, Switch } from 'react-router-dom';
+import { Route, Switch } from 'react-router-dom';
 import Header from './Components/Header';
 import Home from './Home/Home';
 import AddWorkLocation from './AddWorkLocation/AddWorkLocation';
@@ -81,7 +81,7 @@ function App() {
       {user?(
        <div className="loggedInApp">
          
-         <BrowserRouter>
+          
      <Header/>
      <Switch>
       <Route exact path='/' render={()=>(<Home user={user} handleLogout={handleLogout} />)}  />
@@ -93,10 +93,10 @@ function App() {
       <Route exact path='/myhours' render={()=>(<MyHours user={user} />)} />
  
      </Switch>
-   </BrowserRouter>
+   
           </div>
       ):( 
-          <BrowserRouter>
+          
         <Route exact path='/' render={()=>( <Login 
             email={email}
             setEmail={setEmail}
@@ -108,7 +108,7 @@ function App() {
             Emailerror={Emailerror}
             passwordError={passwordError}
             />)}  />
-          </BrowserRouter> 
+          
      
         
         ) }

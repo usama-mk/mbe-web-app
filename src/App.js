@@ -94,17 +94,23 @@ function App() {
      </Switch>
    </BrowserRouter>
           </div>
-      ):(  <Login 
-        email={email}
-        setEmail={setEmail}
-        password={password}
-        setPassword={setPassword}
-        handleLogin={handleLogin}
-        hasAccount={hasAccount}
-        setHasAccount={setHasAccount}
-        Emailerror={Emailerror}
-        passwordError={passwordError}
-        />) }
+      ):( 
+          <BrowserRouter>
+        <Route exact path='/' render={()=>( <Login 
+            email={email}
+            setEmail={setEmail}
+            password={password}
+            setPassword={setPassword}
+            handleLogin={handleLogin}
+            hasAccount={hasAccount}
+            setHasAccount={setHasAccount}
+            Emailerror={Emailerror}
+            passwordError={passwordError}
+            />)}  />
+          </BrowserRouter> 
+     
+        
+        ) }
      
     </div>
   );

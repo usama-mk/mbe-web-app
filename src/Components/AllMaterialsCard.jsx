@@ -19,7 +19,7 @@ export default function AllMaterialsCard(props) {
                 <h2><span style={{color:"#3f51b5"}}>  Category: </span> {props.state.category} </h2>
                 <h2><span style={{color:"#3f51b5"}}>  Materials: </span>{props.state.materials} </h2>
                 <h2><span style={{color:"#3f51b5"}}>  Amount: </span> {props.state.Amount} </h2>
-                <h2><span style={{color:"#3f51b5"}}>  Remarks: </span> {props.state.remarks} </h2>
+                {/* <h2><span style={{color:"#3f51b5"}}>  Remarks: </span> {props.state.remarks} </h2> */}
                 {/* <h2><span style={{color:"#3f51b5"}}>  Selected workplace from dropdown </span> {props.state.workplace} </h2> */}
                 {props.check&&<Button style={buttonStyles} onClick={()=>{deleteItem(props.state.worklocationID)}}>Delete</Button>}
             </Card>

@@ -4,6 +4,9 @@ import {useForm} from 'react-hook-form';
 import { makeStyles } from '@material-ui/core/styles';
 import '../AddWorkLocation/AddWorkLocation.scss';
 import { firebaseApp } from '../firebase';
+import { toast } from 'react-toastify';
+import '../Components/toast.css';
+import 'react-toastify/dist/ReactToastify.css';
 
 
 const useStyles = makeStyles((theme) => ({
@@ -40,7 +43,7 @@ const useStyles = makeStyles((theme) => ({
 
 export default function AddMaterial(props) {
     const classes= useStyles();
-    const {register, handleSubmit, errors} = useForm();
+    const {register, handleSubmit, errors, reset} = useForm();
     const[categories,setCategories]= useState({});
     const[materials,setMaterials]= useState({});
     const[workplaceItems,setWorkplaceItems]= useState([]);
@@ -95,6 +98,14 @@ useEffect(()=>{
         data.user_Email= props.user.email;
         data.invisible="0";
         data.remove="0";
+        const dateL= (new Date(data.date));
+        var dd=(dateL.getDate());
+        var mm=(dateL.getMonth());
+        mm=mm+1;
+        var yyyy=(dateL.getFullYear());
+        data.date= `${mm}/${dd}/${yyyy}`
+        const employName= props.user.email.split('@')[0];
+        data.employ= employName;
         var newRef = firebaseApp.database().ref().child("workmaterials").push();
         // data.worklocationID= groupId;
         var key= newRef.key;
@@ -102,6 +113,16 @@ useEffect(()=>{
         console.log(data);
         newRef.set(data)
         // firebaseApp.database().ref().child("workmaterials").push(data);
+        toast.success('🚀 Successfully added the data to the database ', {
+            position: "bottom-center",
+            autoClose: false,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            });
+            reset();
     };
     return (
         <div  className={classes.paper}>
@@ -154,7 +175,7 @@ useEffect(()=>{
     <label>Amount</label>
   </div>
   {/*  */}
-  <div>
+  {/* <div>
                <span>Select Employee </span>
            <select style={{margin:"10px", padding:"5px"}} id="employee" name="employ" ref={register({required: true})}>
               {Object.values(employs).map((employee)=>{
@@ -164,13 +185,9 @@ useEffect(()=>{
               })}
             </select>
     
-  </div>
-  {/*  */}
-  <div>
-           <input style={{marginTop:"10px"}} placeholder="remarks"  type="text"  name="remarks"  ref={register({required: true})}/>
-    <label >Any Additional Remarks</label>
-  </div>
-  {/*  */}
+  </div> */}
+  {/* upper employee commented  */}
+  
   
   
            {/* {errors.password && <p>{errors.password.message}</p>} */}

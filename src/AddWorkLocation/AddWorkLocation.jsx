@@ -4,8 +4,12 @@ import {useForm} from 'react-hook-form';
 import { makeStyles } from '@material-ui/core/styles';
 import './AddWorkLocation.scss';
 import { firebaseApp } from '../firebase';
+import { toast } from 'react-toastify';
+import '../Components/toast.css';
+import 'react-toastify/dist/ReactToastify.css';
 
 
+toast.configure();
 const useStyles = makeStyles((theme) => ({
     paper: {
         marginTop: theme.spacing(8),
@@ -38,7 +42,7 @@ const useStyles = makeStyles((theme) => ({
 
 export default function AddWorkLocation(props) {
     const classes= useStyles();
-    const {register, handleSubmit, errors} = useForm();
+    const {register, handleSubmit, errors, reset} = useForm();
 
     const onSubmit = data => {
         data.user_Email= props.user.email;
@@ -50,6 +54,17 @@ export default function AddWorkLocation(props) {
         data.key=key;
         console.log(data);
         newRef.set(data)
+        reset();
+        toast.success('🚀 Successfully added the data to the database ', {
+            position: "bottom-center",
+            autoClose: false,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            });
+
     };
     return (
         <div  className={classes.paper}>
@@ -76,10 +91,7 @@ export default function AddWorkLocation(props) {
     <label>Zip Code Place</label>
   </div>
   {/*  */}
-  <div>
-           <input style={{marginTop:"10px"}} placeholder="Email"  type="text" name="email" ref={register({required: true})}/>
-    <label >Email</label>
-  </div>
+   
   
            {/* {errors.password && <p>{errors.password.message}</p>} */}
            <IconButton>

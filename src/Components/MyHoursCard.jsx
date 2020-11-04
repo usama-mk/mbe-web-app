@@ -19,9 +19,9 @@ export default function MyHoursCard(props) {
                 <h2><span style={{color:"#3f51b5"}}>  Employee: </span> {props.state.employ} </h2>
                 <h2><span style={{color:"#3f51b5"}}>  date: </span>{props.state.date} </h2>
                 <h2><span style={{color:"#3f51b5"}}>  description: </span> {props.state.description} </h2>
-                <h2><span style={{color:"#3f51b5"}}>  KM Driven: </span> {props.state.kmdriven} </h2>
+                {/* <h2><span style={{color:"#3f51b5"}}>  KM Driven: </span> {props.state.kmdriven} </h2> */}
                 <h2><span style={{color:"#3f51b5"}}>  Number of Hours: </span> {props.state.hoursworked} </h2>
-                <h2><span style={{color:"#3f51b5"}}>  Parking Cost: </span> {props.state.parkingCost} </h2>
+                {/* <h2><span style={{color:"#3f51b5"}}>  Parking Cost: </span> {props.state.parkingCost} </h2> */}
 
                 {props.check && <Button style={buttonStyles} onClick={()=>{deleteItem(props.state.worklocationID)}}>Delete</Button>}
             </Card>

@@ -1,6 +1,6 @@
 {
-  "homapage": "https://usamamuhammad45678.github.io/mbe-web-app",
   "name": "mbe",
+  "homapage": "https://usamamuhammad45678.github.io/mbe-web-app",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
@@ -17,6 +17,7 @@
     "react-hook-form": "^6.9.6",
     "react-router-dom": "^5.2.0",
     "react-scripts": "4.0.0",
+    "react-toastify": "^6.0.9",
     "web-vitals": "^0.2.4"
   },
   "scripts": {

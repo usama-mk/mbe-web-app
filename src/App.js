@@ -77,7 +77,7 @@ function App() {
 
   return (
     <div className="App">
-        <h1>hiii</h1>
+        
       {user?(
        <div className="loggedInApp">
          

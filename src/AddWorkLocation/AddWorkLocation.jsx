@@ -54,7 +54,7 @@ export default function AddWorkLocation(props) {
         data.key=key;
         console.log(data);
         newRef.set(data)
-        reset();
+       
         toast.success('🚀 Successfully added the data to the database ', {
             position: "bottom-center",
             autoClose: false,
@@ -64,7 +64,7 @@ export default function AddWorkLocation(props) {
             draggable: true,
             progress: undefined,
             });
-
+            reset();
     };
     return (
         <div  className={classes.paper}>

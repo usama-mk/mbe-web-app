@@ -4,6 +4,9 @@ import {useForm} from 'react-hook-form';
 import { makeStyles } from '@material-ui/core/styles';
 import '../AddWorkLocation/AddWorkLocation.scss';
 import { firebaseApp } from '../firebase';
+import { toast } from 'react-toastify';
+import '../Components/toast.css';
+import 'react-toastify/dist/ReactToastify.css';
 
 
 const useStyles = makeStyles((theme) => ({
@@ -38,7 +41,7 @@ const useStyles = makeStyles((theme) => ({
 // const wp=["kies locatie", "HK 25", "Zonnestraal school gebouw", "Project 166", "VR-Trade B.V." ];
 export default function AddHours(props) {
     const classes= useStyles();
-    const {register, handleSubmit, errors} = useForm();
+    const {register, handleSubmit, errors, reset} = useForm();
     const[employs,setEmploys]= useState({});
     const[workplaceItems,setWorkplaceItems]= useState([]);
     var values={};
@@ -73,12 +76,28 @@ useEffect(()=>{
         data.user_Email= props.user.email;
         data.invisible="0";
         data.remove="0";
+        const dateL= (new Date(data.date));
+        var dd=(dateL.getDate());
+        var mm=(dateL.getMonth());
+        mm=mm+1;
+        var yyyy=(dateL.getFullYear());
+        data.date= `${mm}/${dd}/${yyyy}`
         var newRef = firebaseApp.database().ref().child("hoursworked").push();
         // data.worklocationID= groupId;
         var key= newRef.key;
         data.worklocationID=key;
         console.log(data);
-        newRef.set(data)
+        newRef.set(data);
+        toast.success('🚀 Successfully added the data to the database ', {
+            position: "bottom-center",
+            autoClose: false,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            });
+            reset();
     };
     return (
         <div  className={classes.paper}>

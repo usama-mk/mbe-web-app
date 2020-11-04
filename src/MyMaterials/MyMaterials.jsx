@@ -24,7 +24,7 @@ export default class MyMaterials extends Component {
     componentDidMount(){
         firebaseApp.database().ref().child("workmaterials").on("value", snapshot=>{
             if(snapshot.val()!=null){
-                this.setState({...this.state, objectValuesArray: Object.values(snapshot.val()) }, ()=>{
+                this.setState({...this.state, objectValuesArray: Object.values(snapshot.val()).reverse() }, ()=>{
                     console.log(this.state.objectValuesArray);
                 })
             }

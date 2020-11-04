@@ -59,8 +59,8 @@ export default class AllMaterials extends Component {
             <div style={styles} >
                 <h1>All Materials</h1>
                  <div>
-               <span>Select workplace </span>
-           <select style={{margin:"10px", padding:"5px"}} id="workplace" name="workplace" onChange={this.selectedWorkplace} value={this.state.selectedWorkplace} >
+               <span>Select workplace </span>                                             
+           <select style={{margin:"10px", padding:"5px"}} id="workplace" name="workplace" onClick={this.selectedWorkplace} onChange={this.selectedWorkplace} value={this.state.selectedWorkplace} >
               {this.state.workplaceItems && this.state.workplaceItems.map((workplaceItem)=>{   
                return  ( <option value={workplaceItem} >{workplaceItem}</option>); 
               })}

@@ -47,6 +47,7 @@ export default function AddMaterial(props) {
     const[categories,setCategories]= useState({});
     const[materials,setMaterials]= useState({});
     const[workplaceItems,setWorkplaceItems]= useState([]);
+    const[workNameKeys,setWorkNameKeys]= useState([]);
     const[employs,setEmploys]= useState({});
     var values={};
 
@@ -81,6 +82,29 @@ useEffect(()=>{
         }
     })
 
+    // trying to store whole objects against their WL name with value of their ids
+    firebaseApp.database().ref().child("worklocations").on("value", snapshot=>{
+        const wp=[]
+        const wlObjArr=[]
+        if(snapshot.val()!=null){
+            console.log(Object.values(snapshot.val()).map((obj)=>{
+               console.log (obj.name_workLocation)
+               wp.push(obj.name_workLocation);
+               var name= obj.name_workLocation;
+               const wlO={
+                   [name]: obj.key
+               }
+               wlObjArr.push(wlO); 
+               console.log(`here is the name : ${ name } and id ${obj.key}`); 
+            }));
+            console.log(`here is the wl whole obj : ${wlObjArr[0].softics}`); 
+            setWorkNameKeys(wlObjArr);
+         
+            
+
+        }
+    })
+
 },[])
 
  const setMat=( )=>{
@@ -98,6 +122,19 @@ useEffect(()=>{
         data.user_Email= props.user.email;
         data.invisible="0";
         data.remove="0";
+        workNameKeys.map((workNameKey)=>{
+            // console.log(`${Object.keys(workNameKey)}`)
+           var workNameKey1= Object.keys(workNameKey)
+           var workNamevalue1= Object.values(workNameKey)
+           console.log(`keys list ${workNameKey1}`)
+           console.log(`values list ${workNamevalue1}`)
+           console.log(data.workLocationName)
+            if(workNameKey1 == data.workLocationName){
+                
+                 data.worklocationID = workNamevalue1[0];
+                 
+            }
+        })
         const dateL= (new Date(data.date));
         var dd=(dateL.getDate());
         var mm=(dateL.getMonth());
@@ -109,7 +146,7 @@ useEffect(()=>{
         var newRef = firebaseApp.database().ref().child("workmaterials").push();
         // data.worklocationID= groupId;
         var key= newRef.key;
-        data.worklocationID=key;
+        // data.worklocationID=key;
         console.log(data);
         newRef.set(data)
         // firebaseApp.database().ref().child("workmaterials").push(data);

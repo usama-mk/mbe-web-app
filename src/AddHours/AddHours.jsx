@@ -44,6 +44,7 @@ export default function AddHours(props) {
     const {register, handleSubmit, errors, reset} = useForm();
     const[employs,setEmploys]= useState({});
     const[workplaceItems,setWorkplaceItems]= useState([]);
+    const[workNameKeys,setWorkNameKeys]= useState([]);
     var values={};
 
 useEffect(()=>{
@@ -68,6 +69,28 @@ useEffect(()=>{
         }
     })
 
+    firebaseApp.database().ref().child("worklocations").on("value", snapshot=>{
+        const wp=[]
+        const wlObjArr=[]
+        if(snapshot.val()!=null){
+            console.log(Object.values(snapshot.val()).map((obj)=>{
+               console.log (obj.name_workLocation)
+               wp.push(obj.name_workLocation);
+               var name= obj.name_workLocation;
+               const wlO={
+                   [name]: obj.key
+               }
+               wlObjArr.push(wlO); 
+               console.log(`here is the name : ${ name } and id ${obj.key}`); 
+            }));
+            console.log(`here is the wl whole obj : ${wlObjArr[0].softics}`); 
+            setWorkNameKeys(wlObjArr);
+         
+            
+
+        }
+    })
+
 },[])
 
 
@@ -82,10 +105,23 @@ useEffect(()=>{
         mm=mm+1;
         var yyyy=(dateL.getFullYear());
         data.date= `${mm}/${dd}/${yyyy}`
+        workNameKeys.map((workNameKey)=>{
+            // console.log(`${Object.keys(workNameKey)}`)
+           var workNameKey1= Object.keys(workNameKey)
+           var workNamevalue1= Object.values(workNameKey)
+           console.log(`keys list ${workNameKey1}`)
+           console.log(`values list ${workNamevalue1}`)
+           console.log(data.workLocationName)
+            if(workNameKey1 == data.workLocationName){
+                
+                 data.worklocationID = workNamevalue1[0];
+                 
+            }
+        })
         var newRef = firebaseApp.database().ref().child("hoursworked").push();
         // data.worklocationID= groupId;
         var key= newRef.key;
-        data.worklocationID=key;
+        // data.worklocationID=key;
         console.log(data);
         newRef.set(data);
         toast.success('🚀 Successfully added the data to the database ', {
